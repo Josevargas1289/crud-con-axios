@@ -1,0 +1,152 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+/* 
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+.input-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items:flex-end;
+  align-items:flex-start;
+  align-content: center;
+  margin: 1rem;
+}
+.avaliable{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-start;
+ 
+}
+
+.container-form{
+ 
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: 30%;
+  /* background-color: aqua; */
+}
+form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 2px 0px ;
+ 
+}
+.container-app{
+  margin: 5rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  display: flex;
+
+}
+
+.containter-products-list > ul{
+ 
+  list-style: none;
+  font-size: 10px;
+  height: 100%;
+
+ 
+}
+
+.containter-products-list{
+
+  width: 100%;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  width: 80%;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 2px 0px ;
+  margin: 2rem;
+ 
+
+}
+.card > h2{
+  color: rgb(6, 6, 6);
+  font-weight: 100;
+  
+
+}
+
+.card  b{
+ color:black;
+ font-weight: bold;
+ 
+  
+
+}
+button{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+  border-radius: 5px;
+  background-color:yellowgreen;
+  height: 25px;
+  cursor: pointer;
+ 
+
+}
+button:hover{
+  background-color: rgb(33, 9, 95);
+  color: white;
+
+
+
+}
+.btn-todoList{
+  width: 20%;
+  margin-top: 1rem;
+ 
+}
