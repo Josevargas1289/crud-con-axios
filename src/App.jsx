@@ -1,48 +1,75 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import ProductsForm from './components/ProductsForm'
 import Todo from './components/Todo'
 import TodoList from './components/TodoList'
+import axios from 'axios'
 
 
 function App() {
-  const InicialTodosList = [
-    {
-      id: 1,
-      title: "Entregable Rick and morty",
-      description: "se debe realizar una app que busque las locaciones de los personajes de rick",
-      isComplete: true
-    },
-    {
-      id: 2,
-      title: "Entregable wheatterApp",
-      description: "se debe realizar una app que actualice el clima",
-      isComplete: true
-    }
-  ];
 
-const [todosList, setTodosList] = useState(InicialTodosList)
 
-  const addTodo = (todo)=>{
-    // alert(todo.title)
-    setTodosList([...todosList, todo])
+  const [todosList, setTodosList] = useState([])
+  const [todoSelect, setTodoSelect] = useState(null)
+
+  useEffect(() => {
+    axios.get("https://todos-crud.academlo.tech/todos/")
+      .then((res) => setTodosList(res.data))
+
+  }, [])
+
+  console.log(todosList);
+
+  const getTodos = () => {
+    axios.get("https://todos-crud.academlo.tech/todos/")
+      .then((res) => setTodosList(res.data))
+
   }
-  const Delettodo =(todoDelet)=>{
+  const addTodo = (todo) =>{
+    axios.post("https://todos-crud.academlo.tech/todos/",todo)
+    .then(()=> getTodos())
+  }
+
+ 
+
+
+  // const addTodo = (todo) => {
+
+  //   setTodosList([...todosList, todo])
+  // }
+
+
+  const Delettodo = (todoDelet) => {
     const todoFiltrado = todosList.filter(todo => todo.id !== todoDelet.id);
     setTodosList(todoFiltrado)
   }
 
+  const selectTodo = (todo) => {
+    setTodoSelect(todo);
+
+  }
+  const udateTodo = (todo) => {
+    todo.id = todoSelect.id;
+    const index = todosList.findIndex((todo) => todo.id === todoSelect.id);
+    todosList[index] = todo;
+    setTodosList([...todosList])
+    setTodoSelect(null)
+
+
+  }
+
+
   return (
-    
+
     <div className="App">
-      
+
       <div className='container-app'>
-    
-      <ProductsForm addTodo = {addTodo}/>
-      {/* <Todo/> */}
-      <TodoList todosList={todosList} Delettodo={Delettodo}/>
-    </div>
+
+        <ProductsForm addTodo={addTodo} todoSelect={todoSelect} udateTodo={udateTodo} />
+        {/* <Todo/> */}
+        <TodoList todosList={todosList} Delettodo={Delettodo} selectTodo={selectTodo} />
+      </div>
     </div>
   )
 }

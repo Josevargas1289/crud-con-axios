@@ -1,32 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // id, nombre, category, price, isavaliable
-const ProductsForm = ({addTodo}) => {
+const ProductsForm = ({addTodo, todoSelect, udateTodo}) => {
 
     
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [isComplete, setIsComplete] = useState("");
+    const [isCompleted, setIsCompleted] = useState(false);
 
+// aqui se llenan los campos con el producto seleccionado
+    useEffect(()=>{
+        if (todoSelect !== null) {
+            setTitle(todoSelect.title)
+            setDescription(todoSelect.description)
+            setIsCompleted(todoSelect.isCompleted)
+        }else{
+            setTitle(" ")
+            setDescription(" ")
+            setIsCompleted(false)
 
+        }
 
+    },[todoSelect])
 
+  
+
+// se crea el objeto con las variables del usestade para setarialas en los campos
     const submit = (e) => {
         e.preventDefault();
         const todo ={
             id: Date.now(),
             title: title,
             description: description,
-            isComplete: isComplete.toString(),
-           
+            isCompleted: isCompleted
         };
-        console.log(todo);
-        addTodo(todo);
+        if (todoSelect) {
+            udateTodo(todo);
+        }else{
+
+            addTodo(todo);
+        }
+    
+       
     }
   
-
+// se crea el jsx
     return (
         <div className='container-form'>
-            <form onSubmit={submit}>
+           <form onSubmit={submit}>   {/*esta funcion se ejecuta al dar clic en el btn submit */}
             <h1>Todo´s Form</h1>
                 <div className="input-container">
                     <label htmlFor="title">Title: </label>
@@ -42,7 +62,7 @@ const ProductsForm = ({addTodo}) => {
             
                 <div className='input-container avaliable'>
                     <label htmlFor="IsComplete">IsComplete </label>
-                    <input type="checkbox" id='IsComplete' checked={isComplete} onChange={(e)=> setIsComplete(e.target.checked)}  />
+                    <input type="checkbox" id='IsComplete' checked={isCompleted} onChange={(e)=> setIsCompleted(e.target.checked)}  />
                 </div>
                 <button>Submit</button>
 
