@@ -11,7 +11,7 @@ function App() {
 
 
   const [todosList, setTodosList] = useState([])
-  const [todoSelect, setTodoSelect] = useState(null)
+  
 
   useEffect(() => {
     axios.get("https://todos-crud.academlo.tech/todos/")
@@ -20,41 +20,38 @@ function App() {
   }, [])
 
   console.log(todosList);
-
+// el get sirve para llamar la api 
   const getTodos = () => {
     axios.get("https://todos-crud.academlo.tech/todos/")
       .then((res) => setTodosList(res.data))
 
   }
+  //el post sirve para crear un registro
   const addTodo = (todo) =>{
-    axios.post("https://todos-crud.academlo.tech/todos/",todo)
+    axios.post("https://todos-crud.academlo.tech/todos/",todo)  
     .then(()=> getTodos())
   }
 
  
 
 
-  // const addTodo = (todo) => {
-
-  //   setTodosList([...todosList, todo])
-  // }
-
-
+// el axios delet sirve para eliminar el registro, y gettodos es la funcion que trae la api con los registros hechos
   const Delettodo = (todoDelet) => {
-    const todoFiltrado = todosList.filter(todo => todo.id !== todoDelet.id);
-    setTodosList(todoFiltrado)
+    axios.delete(`https://todos-crud.academlo.tech/todos/${todoDelet.id}/`)
+    .then(() => getTodos())
+    
   }
-
+  const [todoSelect, setTodoSelect] = useState(null)
   const selectTodo = (todo) => {
     setTodoSelect(todo);
 
   }
   const udateTodo = (todo) => {
-    todo.id = todoSelect.id;
-    const index = todosList.findIndex((todo) => todo.id === todoSelect.id);
-    todosList[index] = todo;
-    setTodosList([...todosList])
-    setTodoSelect(null)
+    axios.put(`https://todos-crud.academlo.tech/todos/${todoSelect.id}/`, todo)
+    .then(()=>{
+      getTodos()
+      setTodoSelect(null)
+    })
 
 
   }

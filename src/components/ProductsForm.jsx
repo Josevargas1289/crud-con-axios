@@ -6,6 +6,7 @@ const ProductsForm = ({addTodo, todoSelect, udateTodo}) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [isCompleted, setIsCompleted] = useState(false);
+    
 
 // aqui se llenan los campos con el producto seleccionado
     useEffect(()=>{
@@ -17,12 +18,9 @@ const ProductsForm = ({addTodo, todoSelect, udateTodo}) => {
             setTitle(" ")
             setDescription(" ")
             setIsCompleted(false)
-
         }
-
     },[todoSelect])
 
-  
 
 // se crea el objeto con las variables del usestade para setarialas en los campos
     const submit = (e) => {
